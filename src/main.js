@@ -76,9 +76,10 @@ Apify.main(async () => {
     const spreadsheetMetadata = await retryingRequest(sheets.spreadsheets.get({ spreadsheetId })).catch((e) => handleRequestError(e, 'Getting spreadsheet metadata'));
     const sheetsMetadata = spreadsheetMetadata.data.sheets.map((sheet) => sheet.properties);
     let firstSheetName, firstSheetId;
+
     if ( spreadsheetName ) {
         for ( let idx = 0; idx < sheetsMetadata.length; idx++ ) {
-            const { title: _title, sheetId: _sheetId } = sheetsMetadata[0];
+            const { title: _title, sheetId: _sheetId } = sheetsMetadata[idx];
             if ( _title === spreadsheetName ) {
                 firstSheetName = _title;
                 firstSheetId = _sheetId;
