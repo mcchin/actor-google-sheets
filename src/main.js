@@ -25,6 +25,7 @@ Apify.main(async () => {
 
     const {
         spreadsheetId,
+        spreadsheetName,
         publicSpreadsheet = false,
         mode,
         datasetId,
@@ -74,7 +75,24 @@ Apify.main(async () => {
 
     const spreadsheetMetadata = await retryingRequest(sheets.spreadsheets.get({ spreadsheetId })).catch((e) => handleRequestError(e, 'Getting spreadsheet metadata'));
     const sheetsMetadata = spreadsheetMetadata.data.sheets.map((sheet) => sheet.properties);
-    const { title: firstSheetName, sheetId: firstSheetId } = sheetsMetadata[0];
+    let firstSheetName, firstSheetId;
+    if ( spreadsheetName ) {
+        for ( let idx = 0; idx < sheetsMetadata.length; idx++ ) {
+            const { title: _title, sheetId: _sheetId } = sheetsMetadata[0];
+            if ( _title === spreadsheetName ) {
+                firstSheetName = _title;
+                firstSheetId = _sheetId;
+                break;
+            }
+        }
+    }
+
+    if ( !firstSheetName ) {
+        const { title: _title, sheetId: _sheetId } = sheetsMetadata[0];
+        firstSheetName = _title;
+        firstSheetId = _sheetId;
+    }
+
     console.log('name of the first sheet:', firstSheetName);
     console.log('id of the first sheet:', firstSheetId);
 

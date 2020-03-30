@@ -16,6 +16,12 @@
             "description": "Id of the spreadsheet from where the old data will be loaded",
             "editor": "textfield"
         },
+        "spreadsheetName": {
+            "title": "Sheet Name",
+            "type": "string",
+            "description": "Name of the sheet tab (Must be exact name) to work with",
+            "editor": "textfield"
+        },
         "publicSpreadsheet": {
             "title": "Public spreadsheet (read-only)",
             "type": "boolean",
