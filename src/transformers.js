@@ -20,7 +20,8 @@ exports.toRows = (objects) => {
     if (!objects || objects.length === 0) return [];
     const header = Object.keys(objects[0]);
     const values = objects.map((object) => Object.values(object));
-    return [header, ...values];
+    // return [header, ...values];
+    return [...values];
 };
 
 const union = (setA, setB) => {
