@@ -65,12 +65,12 @@ exports.updateRowsObjects = ({ oldObjects = [], newObjects = [], deduplicateByFi
         ? transformFunction({ datasetData: newObjects, spreadsheetData: oldObjects })
         : makeUniqueRows(oldObjects, newObjects, deduplicateByField, deduplicateByEquality);
     // const concated = oldObjects.concat(toConcat);
-    const updatedObjects = allObjects.map((object) => {
-        const updatedObj = object;
-        keys.forEach((key) => {
-            if (!updatedObj[key]) updatedObj[key] = '';
-        });
-        return sortObj(updatedObj);
-    });
-    return updatedObjects;
+    // const updatedObjects = allObjects.map((object) => {
+    //     const updatedObj = object;
+    //     keys.forEach((key) => {
+    //         if (!updatedObj[key]) updatedObj[key] = '';
+    //     });
+    //     return sortObj(updatedObj);
+    // });
+    return allObjects;
 };
