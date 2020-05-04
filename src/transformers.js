@@ -4,7 +4,8 @@ const md5 = require('md5');
 exports.toObjects = (rows) => {
     if (!rows || rows.length <= 1) return [];
     const keys = rows[0];
-    return rows.slice(1).map((row) => {
+    // return rows.slice(1).map((row) => {
+    return rows.map((row) => {
         const obj = {};
         keys.forEach((key, i) => {
             if (typeof row[i] === 'object') {
