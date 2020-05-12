@@ -1,5 +1,6 @@
 const sortObj = require('sort-object');
 const md5 = require('md5');
+const _ = require('lodash');
 
 exports.toObjects = (rows) => {
     if (!rows || rows.length <= 0) return [];
@@ -63,7 +64,7 @@ exports.updateRowsObjects = ({ oldObjects = [], newObjects = [], deduplicateByFi
     const keys = union(oldKeys, newKeys);
     // if no field or equality - this is simple concat
     const allObjects = transformFunction
-        ? transformFunction({ datasetData: newObjects, spreadsheetData: oldObjects })
+        ? transformFunction({ datasetData: newObjects, spreadsheetData: oldObjects, _ })
         : makeUniqueRows(oldObjects, newObjects, deduplicateByField, deduplicateByEquality);
     // const concated = oldObjects.concat(toConcat);
     // const updatedObjects = allObjects.map((object) => {
